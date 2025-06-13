@@ -1,0 +1,14 @@
+{
+  "name": "shopify-theme",
+  "version": "1.0.0",
+  "description": "Custom Shopify theme using Tailwind CSS",
+  "author": "Reginald Higoy",
+  "license": "MIT",
+  "scripts": {
+    "tailwind": "npx @tailwindcss/cli -i ./src/input.css -o ./assets/application.css --watch"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.10",
+    "tailwindcss": "^4.1.10"
+  }
+}
