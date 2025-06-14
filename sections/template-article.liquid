@@ -161,7 +161,7 @@
     </div>
   {% endif %}
 
-  
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -189,9 +189,10 @@
     }
   },
   "datePublished": "{{ article.published_at | date: '%Y-%m-%d' }}",
-  "mainEntityOfPage": "{{ article.url | prepend: shop.url }}"
+  "mainEntityOfPage": {{ request.origin | append: article.url | json }}
 }
 </script>
+
 
 
 
