@@ -161,25 +161,38 @@
     </div>
   {% endif %}
 
-<script>
-    {
-        "@context": "https://schema.org/",
-        "@type": "blogPosts",
-        "headline": {{ article.title | json }}
-        "articleBody": {{ article.content | strip_html | json }},
-        
-        {% if article.excerpt != blank %}
-            "description": {{ aticle.excerpt |  strip_html | json }},
-        {% endif %}
-
-        {% if article.image %}
-            "image": [
-                {{ article.image |  image_url: width:400 |  prepend: 'https:' | json }}
-            ]
-        {% endif %}
   
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ article.title | json }},
+  "articleBody": {{ article.content | strip_html | json }},
+  {% if article.excerpt != blank %}
+    "description": {{ article.excerpt | strip_html | json }},
+  {% endif %}
+  {% if article.image %}
+    "image": [
+      {{ article.image | image_url: width: 400 | prepend: 'https:' | json }}
+    ],
+  {% endif %}
+  "author": {
+    "@type": "Person",
+    "name": {{ article.author | json }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    "logo": {
+      "@type": "ImageObject",
+      "url": {{ settings.logo | image_url: width: 300 | prepend: 'https:' | json }}
     }
+  },
+  "datePublished": "{{ article.published_at | date: '%Y-%m-%d' }}",
+  "mainEntityOfPage": "{{ article.url | prepend: shop.url }}"
+}
 </script>
+
 
 
   {% schema %}
